@@ -24,8 +24,8 @@ class FeatureContext implements Context
      * @Given I am in the current directory
      */
     public function iAmInTheCurrentDirectory()
-        // Nothing to do here really
     {
+        // Nothing to do here really
     }
 
     /**
@@ -33,14 +33,13 @@ class FeatureContext implements Context
      */
     public function iRun($command)
     {
-        $explodedCommand = explode( ' ', $command );
-        if( !file_exists( $explodedCommand[1] ) )
-        {
-            throw new Exception( "The command {$command} does not exist" );
+        $explodedCommand = explode(' ', $command);
+        if (!file_exists($explodedCommand[1])) {
+            throw new Exception("The command {$command} does not exist");
         }
-        
-        exec( $command, $output );
-        $this->output = trim( implode( "\n", $output));
+
+        exec($command, $output);
+        $this->output = trim(implode("\n", $output));
     }
 
     /**
@@ -48,9 +47,8 @@ class FeatureContext implements Context
      */
     public function iShouldGet(PyStringNode $string)
     {
-        if( (string)$string !== $this->output )
-        {
-            throw new Exception( "Actual output is:\n" . $this->output );
+        if ((string)$string !== $this->output) {
+            throw new Exception("Actual output is:\n" . $this->output);
         }
     }
 
