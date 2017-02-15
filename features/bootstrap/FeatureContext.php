@@ -69,4 +69,19 @@ class FeatureContext implements Context
             throw new Exception("Actual output is:\n" . $fileResult);
         }
     }
+
+    /**
+     * @Given the file :targetFile is random
+     */
+    public function theFileIsRandom($targetFile)
+    {
+        $fileInfo = pathinfo($targetFile);
+        if (!file_exists($fileInfo['dirname'])) {
+            mkdir($fileInfo['dirname'], 0777, true);
+        }
+
+        $handler = fopen($targetFile, 'w');
+        fputs($handler, bin2hex(openssl_random_pseudo_bytes(10)));
+        fclose($handler);
+    }
 }
