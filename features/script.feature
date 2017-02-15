@@ -63,10 +63,19 @@ Scenario: Outputting to the same file as the input isn't allowed
     """
   And the file "data/file.csv" should not contain 1000
 
-  Scenario: Run the script with a YML input w/o output should write to stdio
-    Given I am in the current directory
-    When I run "php app/script.php --input=data/file.yml"
-    Then I should get:
+Scenario: Run the script with a YML input w/o output should write to stdio
+  Given I am in the current directory
+  When I run "php app/script.php --input=data/file.yml"
+  Then I should get:
     """
     1000
     """
+
+Scenario: Run the script with a YML input and output to a file
+  Given I am in the current directory
+  When I run "php app/script.php --input=data/file.yml --output=output/result.txt"
+  Then I should get:
+    """
+    The result is in output/result.txt
+    """
+    And the file "output/result.txt" should contain 1000
