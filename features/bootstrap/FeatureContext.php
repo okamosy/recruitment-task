@@ -52,4 +52,21 @@ class FeatureContext implements Context
         }
     }
 
+    /**
+     * @Then the file :outputFile should contain :result
+     */
+    public function theFileShouldContain($outputFile, $result)
+    {
+        if (!file_exists($outputFile)) {
+            throw new Exception("The output file $outputFile does not exist");
+        }
+
+        $handler = fopen($outputFile, 'r');
+        $fileResult = fgets($handler);
+        fclose($handler);
+
+        if ($fileResult != $result) {
+            throw new Exception("Actual output is:\n" . $fileResult);
+        }
+    }
 }

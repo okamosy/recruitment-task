@@ -34,4 +34,12 @@ Scenario: Run the script with a CSV input w/o output should write to stdio
     """
     1000
     """
-  
+
+Scenario: Run the script with a CSV input and output to a file
+  Given I am in the current directory
+  When I run "php app/script.php --input=data/file.csv --output=output/result.txt"
+  Then I should get:
+    """
+    The result is in output/result.txt
+    """
+  And the file "output/result.txt" should contain 1000
