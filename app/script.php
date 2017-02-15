@@ -4,12 +4,14 @@ require_once __DIR__ . '/autoload.php';
 
 use Aura\Cli\CliFactory;
 use App\Reader\Reader;
+use App\Writer\Writer;
 
 $cliFactory = new CliFactory;
 $context = $cliFactory->newContext($GLOBALS);
 
 $options = [
-    'input::'
+    'input::',
+    'output::',
 ];
 
 $getOptions = $context->getopt($options);
@@ -27,7 +29,15 @@ if (!file_exists($input)) {
     exit();
 }
 
+$outputFile = $getOptions->get('--output');
+
 $reader = new Reader($input);
 
 $sum = $reader->getSum();
-print $sum;
+if ($outputFile != null) {
+    $writer = new Writer($outputFile);
+    $writer->write($sum);
+    print "The result is in {$outputFile}\n";
+} else {
+    print $sum;
+}
