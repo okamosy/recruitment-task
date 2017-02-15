@@ -53,3 +53,12 @@ Scenario: Outputting to an existing file should replace the contents
     The result is in output/result.txt
     """
   And the file "output/result.txt" should contain 1000
+
+Scenario: Outputting to the same file as the input isn't allowed
+  Given I am in the current directory
+  When I run "php app/script.php --input=data/file.csv --output=data/file.csv"
+  Then I should get:
+    """
+    The specified output file cannot be the same as the input
+    """
+  And the file "data/file.csv" should not contain 1000

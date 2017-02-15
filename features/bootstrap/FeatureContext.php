@@ -71,6 +71,20 @@ class FeatureContext implements Context
     }
 
     /**
+     * @Then the file :outputFile should not contain :result
+     */
+    public function theFileShouldNotContain($outputFile, $result)
+    {
+        $handler = fopen($outputFile, 'r');
+        $fileResult = fgets($handler);
+        fclose($handler);
+
+        if ($fileResult == $result) {
+            throw new Exception("Actual output is:\n" . $fileResult);
+        }
+    }
+
+    /**
      * @Given the file :targetFile is random
      */
     public function theFileIsRandom($targetFile)
