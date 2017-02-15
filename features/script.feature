@@ -26,3 +26,12 @@ Scenario: Run the script with a non-existing input filepath - with parameter ind
     """
     The specified input file does not exist
     """
+
+Scenario: Run the script with a CSV input w/o output should write to stdio
+  Given I am in the current directory
+  When I run "php app/script.php --input=data/file.csv"
+  Then I should get:
+    """
+    1000
+    """
+  
