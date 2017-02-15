@@ -31,6 +31,10 @@ if (!file_exists($input)) {
 
 $outputFile = $getOptions->get('--output');
 
+if ($outputFile === $input) {
+    print "The specified output file cannot be the same as the input\n";
+    exit();
+}
 $reader = new Reader($input);
 
 $sum = $reader->getSum();
