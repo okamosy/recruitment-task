@@ -5,14 +5,21 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Aura\Cli\CliFactory;
 
 $cliFactory = new CliFactory;
-$stdio = $cliFactory->newStdio();
 $context = $cliFactory->newContext($GLOBALS);
 
-$options = [];
+$options = [
+    'input::'
+];
 
 $getOptions = $context->getopt($options);
 
-if (($input = $getOptions->get(1)) == null) {
+$input = $getOptions->get('--input');
+if($input == null)
+{
+    // The --input flag wasn't used, so try it without the flag
+    $input = $getOptions->get(1);
+}
+if ($input == null) {
     print "You must provide at least one parameter\n";
     exit();
 }
