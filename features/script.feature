@@ -62,3 +62,11 @@ Scenario: Outputting to the same file as the input isn't allowed
     The specified output file cannot be the same as the input
     """
   And the file "data/file.csv" should not contain 1000
+
+  Scenario: Run the script with a YML input w/o output should write to stdio
+    Given I am in the current directory
+    When I run "php app/script.php --input=data/file.yml"
+    Then I should get:
+    """
+    1000
+    """
