@@ -10,3 +10,11 @@ Scenario: Run the script without any parameters
     """
     You must provide at least one parameter
     """
+
+Scenario: Run the script with a non-existing input filepath
+  Given I am in the current directory
+  When I run "php app/script.php data/file.csv"
+  Then I should get:
+    """
+    The specified input file does not exist
+    """
