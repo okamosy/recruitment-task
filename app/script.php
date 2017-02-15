@@ -3,6 +3,7 @@
 require_once __DIR__ . '/autoload.php';
 
 use Aura\Cli\CliFactory;
+use App\Reader\Reader;
 
 $cliFactory = new CliFactory;
 $context = $cliFactory->newContext($GLOBALS);
@@ -25,3 +26,8 @@ if (!file_exists($input)) {
     print "The specified input file does not exist\n";
     exit();
 }
+
+$reader = new Reader($input);
+
+$sum = $reader->getSum();
+print $sum;
