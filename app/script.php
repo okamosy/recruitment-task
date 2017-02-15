@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/autoload.php';
 
 use Aura\Cli\CliFactory;
 
@@ -13,18 +13,15 @@ $options = [
 
 $getOptions = $context->getopt($options);
 
-$input = $getOptions->get('--input');
-if($input == null)
-{
+if (($input = $getOptions->get('--input')) == null) {
     // The --input flag wasn't used, so try it without the flag
-    $input = $getOptions->get(1);
-}
-if ($input == null) {
-    print "You must provide at least one parameter\n";
-    exit();
+    if (($input = $getOptions->get(1)) == null) {
+        print "You must provide at least one parameter\n";
+        exit();
+    }
 }
 
-if( !file_exists($input)) {
+if (!file_exists($input)) {
     print "The specified input file does not exist\n";
     exit();
 }
