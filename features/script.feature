@@ -5,7 +5,7 @@ Feature: script
 
 Scenario: Run the script without any parameters
   Given I am in the current directory
-  When I run "php script.php"
+  When I run "php app/script.php"
   Then I should get:
     """
     You must provide at least one parameter

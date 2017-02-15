@@ -33,7 +33,8 @@ class FeatureContext implements Context
      */
     public function iRun($command)
     {
-        if( !file_exists( $command ) )
+        $explodedCommand = explode( ' ', $command );
+        if( !file_exists( $explodedCommand[1] ) )
         {
             throw new Exception( "The command {$command} does not exist" );
         }
