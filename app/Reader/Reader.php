@@ -4,10 +4,11 @@ namespace App\Reader;
 
 
 use App\Reader\Helper\CsvHelper;
+use App\Reader\Helper\YmlHelper;
 
 class Reader
 {
-    protected $data;
+    protected $data = [];
 
     public function __construct($inputFile)
     {
@@ -16,6 +17,10 @@ class Reader
             case 'csv':
                 $csvHelper = new CsvHelper($inputFile);
                 $this->data = $csvHelper->get();
+                break;
+            case 'yml':
+                $ymlHelper = new YmlHelper($inputFile);
+                $this->data = $ymlHelper->get();
                 break;
         }
     }
