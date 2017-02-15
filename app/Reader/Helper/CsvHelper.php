@@ -4,7 +4,7 @@
 namespace App\Reader\Helper;
 
 
-class CsvHelper
+class CsvHelper implements HelperInterface
 {
     protected $headers = false;
     protected $data = [];
