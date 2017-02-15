@@ -23,7 +23,7 @@ class Reader
     public function getSum()
     {
         $sum = 0;
-        foreach($this->data as $record) {
+        foreach ($this->data as $record) {
             $sum += $record['value'];
         }
 
