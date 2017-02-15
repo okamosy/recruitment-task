@@ -1,0 +1,11 @@
+{
+    "name": "okamosy/recruitment-task",
+    "description": "Recruitment task for Third Bridge",
+    "type": "project",
+    "require-dev": {
+        "behat/behat": "^3.3"
+    },
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
