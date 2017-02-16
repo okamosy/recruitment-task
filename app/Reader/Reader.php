@@ -4,6 +4,7 @@ namespace App\Reader;
 
 
 use App\Reader\Helper\CsvHelper;
+use App\Reader\Helper\XmlHelper;
 use App\Reader\Helper\YmlHelper;
 
 class Reader
@@ -21,6 +22,10 @@ class Reader
             case 'yml':
                 $ymlHelper = new YmlHelper($inputFile);
                 $this->data = $ymlHelper->get();
+                break;
+            case 'xml':
+                $xmlHelper = new XmlHelper($inputFile);
+                $this->data = $xmlHelper->get();
                 break;
         }
     }
