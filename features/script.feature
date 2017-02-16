@@ -3,12 +3,29 @@ Feature: script
   As a CLI user
   I need to be able to generate a sum of a files contents
 
-  Scenario: Run the script without any parameters
+  Scenario: Run the script without any parameters displays help message
     Given I am in the current directory
     When I run "php app/script.php"
     Then I should get:
     """
-    You must provide at least one parameter
+    SUMMARY
+        script.php -- Sums up an input file.
+
+    USAGE
+        script.php [<arg1>]
+
+    DESCRIPTION
+        Reads the input file and sums up all the values found within.  The output
+        is sent to either stdout or the specified output file.
+
+        Supported input formats are csv,xml,yml
+
+    OPTIONS
+        --input=<value>
+            The input file to be read in.
+
+        --output=<value>
+            The target file to output the result to.
     """
 
   Scenario: Run the script with a non-existing input filepath - no parameter indicator
