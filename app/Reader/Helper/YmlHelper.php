@@ -11,7 +11,10 @@ class YmlHelper implements HelperInterface
     public function __construct($filename)
     {
         $data = \Spyc::YAMLLoad($filename);
-        $this->data = isset($data['users']) ? $data['users'] : $data;
+
+        // Throw away the top 'wrapper' element if it exists
+        $firstKey = current(array_keys($data));
+        $this->data = is_array($firstKey) ? $data : $data[$firstKey];
     }
 
     /**
