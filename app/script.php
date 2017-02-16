@@ -24,14 +24,14 @@ if (($input = $getOptions->get('--input')) == null) {
 }
 
 if (!file_exists($input)) {
-    print "The specified input file does not exist\n";
+    $stdio->errln("The specified input file does not exist");
     exit();
 }
 
 $outputFile = $getOptions->get('--output');
 
 if ($outputFile === $input) {
-    print "The specified output file cannot be the same as the input\n";
+    $stdio->errln("The specified output file cannot be the same as the input");
     exit();
 }
 
@@ -42,11 +42,11 @@ try {
     if ($outputFile != null) {
         $writer = new Writer($outputFile);
         $writer->write($sum);
-        print "The result is in {$outputFile}\n";
+        $stdio->outln("The result is in {$outputFile}");
     } else {
         print $sum;
     }
 }
 catch( InvalidArgumentException $e ) {
-    print $e->getMessage();
+    $stdio->errln($e->getMessage());
 }

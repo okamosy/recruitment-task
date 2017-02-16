@@ -38,7 +38,7 @@ class FeatureContext implements Context
             throw new Exception("The command {$command} does not exist");
         }
 
-        exec($command, $output);
+        exec($command . " 2>&1", $output);
         $this->output = trim(implode("\n", $output));
     }
 
