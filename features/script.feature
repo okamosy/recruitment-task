@@ -96,3 +96,11 @@ Feature: script
     The result is in output/result.txt
     """
     And the file "output/result.txt" should contain 1000
+
+  Scenario: Running the script with an unsupported file type warns the user
+    Given I am in the current directory
+    When I run "php app/script.php --input=data/badFileType.txt"
+    Then I should get:
+    """
+    The specified input file is not a supported file type: txt
+    """
