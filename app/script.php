@@ -3,23 +3,22 @@
 require_once __DIR__ . '/autoload.php';
 
 use Aura\Cli\CliFactory;
+use Aura\Cli\Context\OptionFactory;
+use App\Help\ScriptHelp;
 use App\Reader\Reader;
 use App\Writer\Writer;
 
 $cliFactory = new CliFactory;
+$stdio = $cliFactory->newStdio();
 $context = $cliFactory->newContext($GLOBALS);
 
-$options = [
-    'input::',
-    'output::',
-];
-
-$getOptions = $context->getopt($options);
+$help = new ScriptHelp(new OptionFactory());
+$getOptions = $context->getopt($help->getOptions());
 
 if (($input = $getOptions->get('--input')) == null) {
     // The --input flag wasn't used, so try it without the flag
     if (($input = $getOptions->get(1)) == null) {
-        print "You must provide at least one parameter\n";
+        $stdio->outln($help->getHelp('script.php'));
         exit();
     }
 }
