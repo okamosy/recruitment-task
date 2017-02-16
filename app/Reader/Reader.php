@@ -27,6 +27,8 @@ class Reader
                 $xmlHelper = new XmlHelper($inputFile);
                 $this->data = $xmlHelper->get();
                 break;
+            default:
+                throw new \InvalidArgumentException("The specified input file is not a supported file type: {$pathInfo['extension']}");
         }
     }
 

@@ -35,13 +35,19 @@ if ($outputFile === $input) {
     print "The specified output file cannot be the same as the input\n";
     exit();
 }
-$reader = new Reader($input);
 
-$sum = $reader->getSum();
-if ($outputFile != null) {
-    $writer = new Writer($outputFile);
-    $writer->write($sum);
-    print "The result is in {$outputFile}\n";
-} else {
-    print $sum;
+try {
+    $reader = new Reader($input);
+
+    $sum = $reader->getSum();
+    if ($outputFile != null) {
+        $writer = new Writer($outputFile);
+        $writer->write($sum);
+        print "The result is in {$outputFile}\n";
+    } else {
+        print $sum;
+    }
+}
+catch( InvalidArgumentException $e ) {
+    print $e->getMessage();
 }
